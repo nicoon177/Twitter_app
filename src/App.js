@@ -1,45 +1,53 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 
 class App extends Component {
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.state = {
-            twits: [],
-            name: ''
-        }
+            name: 'javascript',
+            twit: [],
+        };
+        this.handleNameChange  = this.handleNameChange.bind(this);
+        this.searchTweets  = this.searchTweets.bind(this);
     }
 
     componentDidMount() {
-        fetch(`api/search?q=%23javascript`)
+        this.searchTweets();
+    }
+
+
+    handleNameChange(event) {
+        this.setState({name: event.target.value});
+    }
+
+
+    searchTweets = () => {
+        fetch(`/api/search?q=${this.state.name}`)
             .then(response => response.json())
             // .then(json => console.log(json))
             .then(json => {
                 this.setState({
-                    twits: json.statuses,
+                    twit: json.statuses,
                 })
-            })
-    }
+            });
 
-    handleNameChange = (event) => {
-        this.setState({name: event.target.value});
-    }
+    };
+
 
     render() {
-        const { twits, name } = this.state;
+        const {twit} = this.state;
         return (
-            <div className='twits'>
+            <div>
                 <div className='search-twit'>
-                    <form action="">
-                        <input className='search' type="text" placeholder='Enter search' onChange={this.handleNameChange}/>
-                        <Link to={`/Search/${name}`}>
-                            <input className='btn-search' type="submit" value='Search'/>
-                        </Link>
+                    <form>
+                        <input className='search' type="text" placeholder='Enter search' onChange={this.handleNameChange} />
+                        <input className='btn-search' type="submit" value='Search' onClick={this.searchTweets} />
                     </form>
                 </div>
                 <div>
                     {
-                        twits.map(function (item) {
+                        twit.map(function (item) {
                             return (
                                 <div className='twit' key={item.id}>
                                     <div className="header_twit">
@@ -67,6 +75,10 @@ class App extends Component {
             </div>
         )
     }
+
+
+
 }
 
-export default App;
+
+export default withRouter(App);
