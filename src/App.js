@@ -31,7 +31,7 @@ class App extends Component {
                     twit: json.statuses,
                 })
             });
-
+        this.props.history.push(`/search?q=${this.state.name}`)
     };
 
 
