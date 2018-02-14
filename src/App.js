@@ -54,7 +54,7 @@ class App extends Component {
                                         </div>
                                         <div className="header-content">
                                             <h4 className="header-name">
-                                                    <a href="">{item.user.name} <span>{item.user.screen_name}</span></a>
+                                                    <a href={`https://twitter.com/${item.user.screen_name}`} target="_blank">{item.user.name} <span>{item.user.screen_name}</span></a>
                                                 <span className='header-data'>{item.created_at}</span>
                                             </h4>
                                             <div className="twit_content">
