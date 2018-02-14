@@ -9,11 +9,21 @@ a{
 input{
   outline: none;
 }
+.display-twits{
+  margin-bottom: 30px;
+}
+.btn-search{
+    border: none;
+    font-size: 24px;
+    color: #009D91;
+    cursor: pointer;
+    background-color: transparent;
+}
 .search-twit{
   text-align: center;
   margin: 20px 0;
 }
-.search-twit input{
+.search-twit .search{
   padding: 5px 10px;
   border: none;
   border-bottom: 1px solid #5CCCCC;
